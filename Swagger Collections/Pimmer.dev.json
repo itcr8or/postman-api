@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "2e2bdcce-2ced-4011-8f5f-2abca645e9c4",
+		"name": "Pimmer.dev",
+		"description": "SaaS e-commerce platform that create App Clips and Instant Apps.\n\nContact Support:\n Email: help@pimmer.io",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "11846079-2e2bdcce-2ced-4011-8f5f-2abca645e9c4"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "/user/auth",
+							"id": "aedb48b5-3122-47d2-89ce-3a1563eec25e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"authToken\": \"token123\",\n  \"authProvider\": \"google\",\n  \"deviceId\": \"<string>\",\n  \"username\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/auth?guestToken=<string>&os=<string>&lang=<string>&versionApp=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"auth"
+									],
+									"query": [
+										{
+											"key": "guestToken",
+											"value": "<string>",
+											"description": "(Required) Гостевой токен"
+										},
+										{
+											"key": "os",
+											"value": "<string>",
+											"description": "(Required) Операционная система устройства"
+										},
+										{
+											"key": "lang",
+											"value": "<string>",
+											"description": "Идентификатор языка"
+										},
+										{
+											"key": "versionApp",
+											"value": "<string>",
+											"description": "Версия приложения"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "5896471f-dbbf-42a2-bbb6-7e43427452dc",
+									"name": "successful operation",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"authToken\": \"<string>\",\n  \"authProvider\": \"google\",\n  \"deviceId\": \"<string>\",\n  \"username\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user/auth?guestToken=<string>&os=<string>&lang=<string>&versionApp=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user",
+												"auth"
+											],
+											"query": [
+												{
+													"description": "(Required) Гостевой токен",
+													"key": "guestToken",
+													"value": "<string>"
+												},
+												{
+													"description": "(Required) Операционная система устройства",
+													"key": "os",
+													"value": "<string>"
+												},
+												{
+													"description": "Идентификатор языка",
+													"key": "lang",
+													"value": "<string>"
+												},
+												{
+													"description": "Версия приложения",
+													"key": "versionApp",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"accessToken\": \"<string>\",\n  \"user\": {\n    \"userId\": \"<string>\",\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"birthday\": \"<date>\",\n    \"subscribeNews\": \"<boolean>\",\n    \"seller\": \"<boolean>\",\n    \"lang\": \"<string>\",\n    \"langName\": \"<string>\",\n    \"addresses\": [\n      {\n        \"addressId\": \"<string>\",\n        \"addressName\": \"<string>\",\n        \"main\": \"<boolean>\",\n        \"sort\": \"<integer>\",\n        \"countryId\": \"<string>\",\n        \"countryName\": \"<string>\",\n        \"regionId\": \"<string>\",\n        \"regionName\": \"<string>\",\n        \"cityId\": \"<string>\",\n        \"cityName\": \"<string>\",\n        \"street\": \"<string>\",\n        \"house\": \"<string>\",\n        \"apartment\": \"<string>\",\n        \"comment\": \"<string>\",\n        \"geoPoint\": \"<string>\"\n      },\n      {\n        \"addressId\": \"<string>\",\n        \"addressName\": \"<string>\",\n        \"main\": \"<boolean>\",\n        \"sort\": \"<integer>\",\n        \"countryId\": \"<string>\",\n        \"countryName\": \"<string>\",\n        \"regionId\": \"<string>\",\n        \"regionName\": \"<string>\",\n        \"cityId\": \"<string>\",\n        \"cityName\": \"<string>\",\n        \"street\": \"<string>\",\n        \"house\": \"<string>\",\n        \"apartment\": \"<string>\",\n        \"comment\": \"<string>\",\n        \"geoPoint\": \"<string>\"\n      }\n    ],\n    \"verifiedAge\": \"<integer>\",\n    \"newNotifications\": \"<integer>\"\n  }\n}"
+								},
+								{
+									"id": "ab3f9245-957f-46e7-9bb6-100eae73a63d",
+									"name": "некорректный serviceToken",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"authToken\": \"<string>\",\n  \"authProvider\": \"google\",\n  \"deviceId\": \"<string>\",\n  \"username\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user/auth?guestToken=<string>&os=<string>&lang=<string>&versionApp=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user",
+												"auth"
+											],
+											"query": [
+												{
+													"description": "(Required) Гостевой токен",
+													"key": "guestToken",
+													"value": "<string>"
+												},
+												{
+													"description": "(Required) Операционная система устройства",
+													"key": "os",
+													"value": "<string>"
+												},
+												{
+													"description": "Идентификатор языка",
+													"key": "lang",
+													"value": "<string>"
+												},
+												{
+													"description": "Версия приложения",
+													"key": "versionApp",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"disabled": false,
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											},
+											"key": "WWW_Authenticate",
+											"value": "<string>"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"id": "ec8d6b90-9a54-4971-ad56-ae811da606e9"
+				}
+			],
+			"id": "56b2d605-e8a1-44a8-88aa-4ffcf2a38ff2"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "serviceToken",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "76a0193b-aafa-4a2d-9591-d1e0ac533c80",
+			"key": "baseUrl",
+			"value": "https://shop.pimmer.app/api/v1.0"
+		}
+	]
+}

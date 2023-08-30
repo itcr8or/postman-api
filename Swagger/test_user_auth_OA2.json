@@ -1,0 +1,390 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "SaaS e-commerce platform that create App Clips and Instant Apps.",
+        "version": "1.0",
+        "title": "Pimmer.dev",
+        "contact": {
+            "email": "help@pimmer.io"
+        }
+    },
+    "host": "shop.pimmer.app",
+    "basePath": "/api/v1.0/",
+    "schemes": [
+        "https"
+    ],
+    "tags": [
+        {
+            "name": "Users",
+            "description": "Информация по клиентам"
+        }
+    ],
+    "security": [
+        {
+            "serviceTokenAuth": []
+        }
+    ],
+    "paths": {
+        "/user/auth": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Регистрация/авторизация покупателя",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "authToken": {
+                                    "type": "string",
+                                    "description": "токен доступа из внешнего сервиса apple/google"
+                                },
+                                "authProvider": {
+                                    "type": "string",
+                                    "description": "Провайдер авторизации",
+                                    "enum": [
+                                        "apple",
+                                        "google"
+                                    ]
+                                },
+                                "deviceId": {
+                                    "type": "string",
+                                    "description": "Идентификатор устройства"
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "description": "Имя пользователя"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "description": "Email пользователя"
+                                }
+                            },
+                            "required": [
+                                "authToken",
+                                "authProvider"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "guestToken",
+                        "in": "query",
+                        "type": "string",
+                        "required": true,
+                        "description": "Гостевой токен"
+                    },
+                    {
+                        "name": "os",
+                        "in": "query",
+                        "type": "string",
+                        "required": true,
+                        "description": "Операционная система устройства"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "type": "string",
+                        "required": false,
+                        "description": "Идентификатор языка"
+                    },
+                    {
+                        "name": "versionApp",
+                        "in": "query",
+                        "description": "Версия приложения",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "accessToken": {
+                                    "type": "string",
+                                    "description": "Токен доступа авторизованного пользователя"
+                                },
+                                "user": {
+                                    "$ref": "#/definitions/User"
+                                }
+                            },
+                            "example": {
+                                "accessToken": "SMBBo07OXH6RDo19LbHLDPFM3aESpI-fmmB6T9Xfhhvd7CaqQuLAKGI_BkwP0qlkVqdYmlF_JJHorA-v6v-7HQpQLfq8HbYv7LjVJAo5alRvUlmuCNXsap5h",
+                                "user": {
+                                    "userId": "59f17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                    "sessionId": "0a0217fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                    "name": "Иван Петров",
+                                    "phone": "+71234567890",
+                                    "email": "petrov_vanya@gmail.com",
+                                    "birthday": "12.12.2000",
+                                    "subscribeNews": true,
+                                    "seller": false,
+                                    "lang": "rus",
+                                    "addresses": [
+                                        {
+                                            "addressId": "26f17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                            "addressName": "Дом",
+                                            "main": true,
+                                            "countryId": "12a17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                            "countryName": "Россия",
+                                            "regionId": "2bd57fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                            "regionName": "Москва и Московская область",
+                                            "cityId": "0a027fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                            "cityName": "Москва",
+                                            "street": "Большая Садовая",
+                                            "house": "1",
+                                            "apartment": "20",
+                                            "comment": "10 этаж",
+                                            "geoPoint": "41.225556, 56.78962"
+                                        },
+                                        {
+                                            "addressId": "7f26f1c7-42d0-417a-ba12-f2bc5f9c0a0d",
+                                            "addressName": "Дом",
+                                            "main": false,
+                                            "countryId": "12a17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                            "countryName": "Россия",
+                                            "regionId": "2bd57fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                            "regionName": "Москва и Московская область",
+                                            "cityId": "0a027fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                                            "cityName": "Москва",
+                                            "street": "Столярный переулок",
+                                            "house": "31",
+                                            "apartment": "210",
+                                            "comment": "25 этаж",
+                                            "geoPoint": "41.325556, 57.78962"
+                                        }
+                                    ],
+                                    "newNotifications": 0
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/responses/ServiceTokenError"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "serviceTokenAuth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "serviceToken",
+            "description": "Сервисный ключ доступа идентифицирует приложение. Все запросы к API, совершённые с использованием Вашего ключа доступа, будут считаться совершёнными от имени Вашего приложения."
+        },
+        "Bearer": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "accessToken",
+            "description": "Ключ доступа клиента. Все запросы к API, совершённые с использованием этого ключа доступа, будут считаться совершёнными от имени пользователя."
+        }
+    },
+    "responses": {
+        "UnauthorizedError": {
+            "description": "Неавторизованный пользователь",
+            "headers": {
+                "WWW_Authenticate": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceTokenError": {
+            "description": "некорректный serviceToken",
+            "headers": {
+                "WWW_Authenticate": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "properties": {
+                "userId": {
+                    "type": "string",
+                    "description": "Идентификатор пользователя"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Имя и фамилия пользователя"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Форматированный номер телефона"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email пользователя"
+                },
+                "birthday": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "День рождения пользователя"
+                },
+                "subscribeNews": {
+                    "type": "boolean",
+                    "description": "Флаг подписки на новости, true, если подписан"
+                },
+                "seller": {
+                    "type": "boolean",
+                    "description": "Флаг принадлежности к продавцам, true, если пользователь - продавец"
+                },
+                "lang": {
+                    "type": "string",
+                    "description": "Идентификатор языка пользователя"
+                },
+                "langName": {
+                    "type": "string",
+                    "description": "Наименование языка пользователя"
+                },
+                "addresses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/UserAddress"
+                    }
+                },
+                "verifiedAge": {
+                    "type": "integer",
+                    "description": "Подтвержденный возраст пользователя"
+                },
+                "newNotifications": {
+                    "type": "integer",
+                    "description": "Количество непрочитанных уведомлений пользователя"
+                }
+            },
+            "example": {
+                "userId": "59f17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                "sessionId": "0a0217fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                "name": "Иван Петров",
+                "phone": "+71234567890",
+                "email": "petrov_vanya@gmail.com",
+                "birthday": "12.12.2000",
+                "verifiedAge": 18,
+                "subscribeNews": true,
+                "seller": false,
+                "lang": "rus",
+                "addresses": [
+                    {
+                        "addressId": "26f17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                        "addressName": "Дом",
+                        "main": true,
+                        "countryId": "12a17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                        "countryName": "Россия",
+                        "regionId": "2bd57fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                        "regionName": "Москва и Московская область",
+                        "cityId": "0a027fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                        "cityName": "Москва",
+                        "street": "Большая Садовая",
+                        "house": "1",
+                        "apartment": "20",
+                        "comment": "10 этаж",
+                        "geoPoint": "41.225556, 56.78962"
+                    },
+                    {
+                        "addressId": "7f26f1c7-42d0-417a-ba12-f2bc5f9c0a0d",
+                        "addressName": "Дом",
+                        "main": false,
+                        "countryId": "12a17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                        "countryName": "Россия",
+                        "regionId": "2bd57fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                        "regionName": "Москва и Московская область",
+                        "cityId": "0a027fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                        "cityName": "Москва",
+                        "street": "Столярный переулок",
+                        "house": "31",
+                        "apartment": "210",
+                        "comment": "25 этаж",
+                        "geoPoint": "41.325556, 57.78962"
+                    }
+                ],
+                "newNotifications": 0
+            }
+        },
+        "UserAddress": {
+            "properties": {
+                "addressId": {
+                    "type": "string",
+                    "description": "Идентификатор адреса"
+                },
+                "addressName": {
+                    "type": "string",
+                    "description": "Наименование адреса: Дом/работа и т.п."
+                },
+                "main": {
+                    "type": "boolean",
+                    "description": "Флаг основного адреса пользователя, true, если основной"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "Порядок сортировки"
+                },
+                "countryId": {
+                    "type": "string",
+                    "description": "Идентификатор страны"
+                },
+                "countryName": {
+                    "type": "string",
+                    "description": "Название страны"
+                },
+                "regionId": {
+                    "type": "string",
+                    "description": "Идентификатор региона"
+                },
+                "regionName": {
+                    "type": "string",
+                    "description": "Название региона"
+                },
+                "cityId": {
+                    "type": "string",
+                    "description": "Идентификатор города"
+                },
+                "cityName": {
+                    "type": "string",
+                    "description": "Название города"
+                },
+                "street": {
+                    "type": "string",
+                    "description": "Улица"
+                },
+                "house": {
+                    "type": "string",
+                    "description": "Номер дома"
+                },
+                "apartment": {
+                    "type": "string",
+                    "description": "Номер квартирstore"
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "Комментарий"
+                },
+                "geoPoint": {
+                    "type": "string",
+                    "description": "Геоточка адреса"
+                }
+            },
+            "example": {
+                "addressId": "26f17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                "addressName": "Дом",
+                "main": false,
+                "sort": 1,
+                "countryId": "12a17fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                "countryName": "Россия",
+                "regionId": "2bd57fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                "regionName": "Москва и Московская область",
+                "cityId": "0a027fc7-4d20-417a-b45a-fcc0a02bd5f9",
+                "cityName": "Москва",
+                "street": "Большая Садовая",
+                "house": "1",
+                "apartment": "20",
+                "comment": "10 этаж",
+                "geoPoint": "41.225556, 56.78962"
+            }
+        }
+    }
+}
