@@ -16,7 +16,7 @@
     "tags": [
         {
             "name": "Users",
-            "description": "Информация по клиентам"
+            "description": "Информация по клиентам v1"
         }
     ],
     "security": [
@@ -45,7 +45,7 @@
                                 },
                                 "authProvider": {
                                     "type": "string",
-                                    "description": "Сервер авторизации",
+                                    "description": "Провайдер авторизации",
                                     "enum": [
                                         "apple",
                                         "google"
